@@ -1,0 +1,18 @@
+service: opsgenie-who-is-on-call-slack-bot
+frameworkVersion: '3'
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-southeast-2
+  environment:
+    GENIE_KEY: ${env:GENIE_KEY}
+
+functions:
+  whoisoncall:
+    handler: handler.whoisoncall
+    events:
+      - httpApi:
+          path: /whoisoncall
+          method: post
